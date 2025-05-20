@@ -1,0 +1,2 @@
+use("ruchva_store")
+db.inventory.find()

@@ -1,0 +1,13 @@
+use("ruchva_store")
+
+db.products.updateOne(
+    { _id: 1 },
+    {
+        $set: {
+            name: "product-updated",
+            price: 1000
+        }
+    }
+)
+
+db.products.find()

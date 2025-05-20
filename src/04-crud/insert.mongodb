@@ -1,0 +1,3 @@
+use("ruchva_store")
+db.products.insertOne({name:"propduct-1",price:1000})
+db.products.insertOne({name:"propduct-2",price:100})

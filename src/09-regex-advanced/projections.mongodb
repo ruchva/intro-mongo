@@ -1,0 +1,32 @@
+db.trips.find(
+    {},
+    { _id: false, tripduration: true  }
+    )
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    )
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty()
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty().limit(5)
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty().limit(5).sort({ tripduration: 1 })
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty().limit(5).sort({ tripduration: -1 })
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty().limit(5).sort({ tripduration: -1 }).hint({ tripduration: 1 })
+db.trips.find(
+    { tripduration: { $regex: /[0-9]{1,2}:[0-9]{2}:[0-9]{2}/ } },
+    { _id: false, tripduration: true  }
+    ).pretty().limit(5).sort({ tripduration: -1 }).hint({ tripduration: 1 }).explain("executionStats")

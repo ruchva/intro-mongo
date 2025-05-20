@@ -1,0 +1,63 @@
+use("sample_training")
+
+// db.inspections.find()
+
+// db.inspections.find(
+//     { "address.city": { $regex: /New York/i } },
+//     { _id: false, "address.city": true }
+// ).count()
+db.inspections.find(
+    { "address.city": { $regex: /New York/i } },
+    { _id: false, "address.city": true }
+).pretty()
+
+//implicitamente poner las condiciones de la query [ {}, {}, {} ] una
+//luego de la otra ya representa un operador logico AND
+
+//$or: [{},{},{}]
+db.inspections.find(
+    { $or: [
+        { "address.city": { $regex: /New York/i } },
+        { "address.city": { $regex: /Brooklyn/i } }
+    ]},
+    { _id: false, "address.city": true }
+).pretty()
+
+
+//$nor: [{},{},{}]
+db.inspections.find(
+    { $nor: [
+        { "address.city": { $regex: /New York/i } },
+        { "address.city": { $regex: /Brooklyn/i } }
+    ]},
+    { _id: false, "address.city": true }
+).pretty()
+
+//$and: [{},{},{}]
+db.inspections.find(
+    { $and: [
+        { "address.city": { $regex: /New York/i } },
+        { "address.state": { $regex: /NY/i } }
+    ]},
+    { _id: false, "address.city": true }
+).pretty()
+
+//$not: { $regex: /New York/i }
+db.inspections.find(
+    { "address.city": { $not: { $regex: /New York/i } }},
+    { _id: false, "address.city": true }
+).pretty()
+
+//$exists: true
+db.inspections.find(
+    { "address.city": { $exists: true }},
+    { _id: false, "address.city": true }
+).pretty()
+
+//$exists: false
+db.inspections.find(
+    { "address.city": { $exists: false }},
+    { _id: false, "address.city": true }
+).pretty()
+
+

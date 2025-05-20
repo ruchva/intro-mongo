@@ -1,0 +1,8 @@
+use("sample_training")
+
+//sort and limit example
+db.zips
+    .find({ "pop": { $gte: 100 } })
+    .sort({ "pop": -1 })
+    .limit(5)
+    .pretty()

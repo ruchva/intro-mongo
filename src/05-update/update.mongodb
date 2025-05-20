@@ -1,0 +1,37 @@
+use("sample_training");
+
+db.zips.updateMany(
+  //query has two conditions, population $gt is greater than
+  { city: "CLEVELAND", pop: { $gt: 50000 } },
+  {
+    $inc: {
+      pop: 20,
+    },
+    $set: {
+      //add new attribute
+      my_description: "This state is bigger",
+    },
+  }
+);
+
+db.zips.updateMany(
+  { city: "CLEVELAND", pop: { $gt: 50000 } },
+  {
+    $rename: {
+      //rename this attribute
+      my_description: "description",
+    },
+  }
+);
+
+db.zips.updateMany(
+  { city: "CLEVELAND", pop: { $gt: 50000 } },
+  {
+    $unset: {
+      // delete this attribute
+      description: "",
+    },
+  }
+);
+
+db.zips.find({ city: "CLEVELAND", pop: { $gt: 50000 } });

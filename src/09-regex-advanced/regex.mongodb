@@ -1,0 +1,29 @@
+use("ruchva_store")
+
+// regex = expresiones regulares
+
+db.inventory.find ({ "item.description": "Single line description." })
+// busqueda exacta
+db.inventory.find ({ "item.description": { $regex: "Single line description." }})
+
+db.inventory.find ({ "item.description": { $regex: /LINE/i }})
+// poner una "i" alfinal indica que se haga la busqeuda indiferentemente si esta en minuscula o mayuscula
+
+db.inventory.find ({ "item.description": { $regex: /line$/i }})
+// poner un $ alfinal es para que traiga los resultados que tienen esa palabra alfinal
+
+db.inventory.find ({ "item.description": { $regex: /^single/i }})
+// poner un ^ al principio es para que traiga los resultados que tienen esa palabra alfinal
+
+db.inventory.find ({ "item.description": { $regex: /^s/i }})
+
+// operador "m" para buscar en todos los documentos, aunque tengan saltos de linea
+db.inventory.find ({ "item.description": { $regex: /^s/im }})
+
+db.inventory.find ({ "item.description": { $regex: /line\s+description/i }})
+// \s = espacio
+
+db.inventory.find ({ "item.description": { $regex: /line\s+description/i }}).pretty()
+// \s+ = uno o mas espacios
+
+db.inventory.find()

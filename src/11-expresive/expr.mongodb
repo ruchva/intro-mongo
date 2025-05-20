@@ -1,0 +1,16 @@
+use("ruchva_store")
+
+// $expr: 
+db.monthlyBudget.find({
+    $expr: {
+        $gt: [
+            { $subtract: ["$budget", "$spent"] },
+            0
+        ]
+    }
+}, {
+    _id: false,
+    category: true,
+    budget: true,
+    spent: true
+})

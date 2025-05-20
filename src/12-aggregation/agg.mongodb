@@ -1,0 +1,37 @@
+use("sample_airbnb")
+
+// db.listingsAndReviews.find({ 
+//     $expr: {
+//         $and: [
+//             { $eq: ["$bedrooms", "$bathrooms"] },
+//             { $gte: ["$bedrooms", 2] }
+//         ]
+//     }
+// }, {
+//     _id: false,
+//     name: true,
+//     bedrooms: true,
+//     bathrooms: true
+// })
+
+// aggregation framework example
+db.listingsAndReviews.aggregate([
+    {
+        $match: {
+            $expr: {
+                $and: [
+                    { $eq: ["$bedrooms", "$bathrooms"] },
+                    { $gte: ["$bedrooms", 2] }
+                ]
+            }
+        }
+    },
+    {
+        $project: {
+            _id: false,
+            name: true,
+            bedrooms: true,
+            bathrooms: true
+        }
+    }
+])
